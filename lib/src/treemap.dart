@@ -69,7 +69,7 @@ class TreeNode {
   }
 }
 
-class Treemap {
+class TreeMap {
   final TreeNode root;
   final Size size;
   final EdgeInsets padding;
@@ -81,7 +81,7 @@ class Treemap {
     return root._leafs;
   }
 
-  Treemap({
+  TreeMap({
     @required this.root,
     @required this.size,
     this.padding = const EdgeInsets.all(2),
@@ -250,7 +250,7 @@ class TreeMapBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        var treemap = Treemap(
+        var treemap = TreeMap(
           root: root,
           size: Size(constraints.maxWidth, constraints.maxHeight),
           padding: padding,
