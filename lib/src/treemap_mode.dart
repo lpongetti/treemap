@@ -1,4 +1,4 @@
-enum TreemapMode {
+enum TreeMapMode {
   Squarify,
   Dice,
   Slice,

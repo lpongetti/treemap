@@ -24,7 +24,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       body: TreeMapBuilder(
         padding: EdgeInsets.symmetric(horizontal: 20),
-        mode: TreemapMode.Squarify,
+        mode: TreeMapMode.Squarify,
         root: TreeNode.node(children: [
           TreeNode.leaf(value: 4),
           TreeNode.leaf(value: 4),

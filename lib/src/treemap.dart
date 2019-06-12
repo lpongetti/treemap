@@ -75,7 +75,7 @@ class TreeMap {
   final EdgeInsets padding;
   final bool sticky;
   final num ratio;
-  final TreemapMode mode;
+  final TreeMapMode mode;
 
   List<TreeNode> get leafs {
     return root._leafs;
@@ -87,7 +87,7 @@ class TreeMap {
     this.padding = const EdgeInsets.all(2),
     this.sticky = false,
     this.ratio = 1.61803398875,
-    this.mode = TreemapMode.Squarify,
+    this.mode = TreeMapMode.Squarify,
   })  : assert(root != null && root.children.length > 0),
         assert(size != null && size.width > 0 && size.height > 0) {
     root._width = size.width;
@@ -103,22 +103,22 @@ class TreeMap {
       var rect = _rectanglePadding(node);
       var remaining = List<TreeNode>()..addAll(children);
       var best = double.infinity;
-      num u;
+      num side;
       switch (mode) {
-        case TreemapMode.Slice:
-          u = rect.width;
+        case TreeMapMode.Slice:
+          side = rect.width;
           break;
-        case TreemapMode.Dice:
-          u = rect.height;
+        case TreeMapMode.Dice:
+          side = rect.height;
           break;
-        case TreemapMode.SliceDice:
+        case TreeMapMode.SliceDice:
           if (node.depth & 1 > 0)
-            u = rect.height;
+            side = rect.height;
           else
-            u = rect.width;
+            side = rect.width;
           break;
         default:
-          u = min(rect.width, rect.height);
+          side = min(rect.width, rect.height);
       }
 
       _scale(remaining, rect.width * rect.height / node.value);
@@ -128,20 +128,20 @@ class TreeMap {
         row.add(child);
         area += child._area;
 
-        var score = _worst(row, area, u);
-        if (mode != TreemapMode.Squarify || score <= best) {
+        var score = _worst(row, area, side);
+        if (mode != TreeMapMode.Squarify || score <= best) {
           remaining.removeLast();
           best = score;
         } else {
           area -= row.removeLast()._area;
-          _position(row, area, u, rect, false);
-          u = min(rect.width, rect.height);
+          _position(row, area, side, rect, false);
+          side = min(rect.width, rect.height);
           row.length = area = 0;
           best = double.infinity;
         }
       }
       if (row.length > 0) {
-        _position(row, area, u, rect, true);
+        _position(row, area, side, rect, true);
         row.length = area = 0;
       }
       children.forEach(_squarify);
@@ -165,9 +165,9 @@ class TreeMap {
     return MutableRectangle(x, y, dx, dy);
   }
 
-  double _worst(List<TreeNode> row, double area, double u) {
+  double _worst(List<TreeNode> row, double area, double side) {
     var area2 = pow(area, 2);
-    var u2 = pow(u, 2);
+    var side2 = pow(side, 2);
     num rmax = 0;
     num rmin = double.infinity;
 
@@ -178,17 +178,17 @@ class TreeMap {
       if (areaChild > rmax) rmax = areaChild;
     }
     return area2 > 0
-        ? max(u2 * rmax * ratio / area2, area2 / (u2 * rmin * ratio))
+        ? max(side2 * rmax * ratio / area2, area2 / (side2 * rmin * ratio))
         : double.infinity;
   }
 
-  _position(List<TreeNode> row, double area, double u, MutableRectangle rect,
+  _position(List<TreeNode> row, double area, double side, MutableRectangle rect,
       bool flush) {
     double x = rect.left;
     double y = rect.top;
-    double v = u > 0 ? area / u : 0;
+    double v = side > 0 ? area / side : 0;
     TreeNode child;
-    if (u == rect.width) {
+    if (side == rect.width) {
       if (flush || v > rect.height) {
         v = rect.height;
       }
@@ -236,14 +236,14 @@ class TreeMapBuilder extends StatelessWidget {
   final EdgeInsets padding;
   final bool sticky;
   final num ratio;
-  final TreemapMode mode;
+  final TreeMapMode mode;
 
   TreeMapBuilder({
     this.root,
     this.padding = const EdgeInsets.all(2),
     this.sticky = false,
     this.ratio = 1.61803398875,
-    this.mode = TreemapMode.Squarify,
+    this.mode = TreeMapMode.Squarify,
   });
 
   @override
