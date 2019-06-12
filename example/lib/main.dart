@@ -22,24 +22,43 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TreeMapBuilder(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        mode: TreeMapMode.Squarify,
-        root: TreeNode.node(children: [
-          TreeNode.leaf(value: 4),
-          TreeNode.leaf(value: 4),
-          TreeNode.leaf(value: 4),
-          TreeNode.leaf(value: 3),
-          TreeNode.leaf(value: 3),
-          TreeNode.leaf(value: 3),
-          TreeNode.leaf(value: 2),
-          TreeNode.leaf(value: 2),
-          TreeNode.leaf(value: 2),
-          TreeNode.leaf(value: 1),
-          TreeNode.leaf(value: 1),
-          TreeNode.leaf(value: 1),
-          TreeNode.leaf(value: 1),
-        ]),
+      body: Center(
+        child: Container(
+          color: Colors.red,
+          width: 425,
+          height: 425,
+          child: TreeMapBuilder(
+            tile: Binary(),
+            root: TreeNode.node(
+                // padding: EdgeInsets.symmetric(horizontal: 20),
+                children: [
+                  TreeNode.leaf(
+                    value: 16,
+                    margin: EdgeInsets.all(5),
+                  ),
+                  TreeNode.leaf(
+                    value: 57,
+                    margin: EdgeInsets.all(5),
+                  ),
+                  TreeNode.leaf(
+                    value: 97,
+                    margin: EdgeInsets.all(5),
+                  ),
+                  TreeNode.leaf(
+                    value: 3,
+                    margin: EdgeInsets.all(5),
+                  ),
+                  TreeNode.leaf(
+                    value: 43,
+                    margin: EdgeInsets.all(5),
+                  ),
+                  TreeNode.leaf(
+                    value: 54,
+                    margin: EdgeInsets.all(5),
+                  ),
+                ]),
+          ),
+        ),
       ),
     );
   }
