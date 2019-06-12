@@ -1,6 +1,6 @@
 # Treemap
 
-[![pub package](https://img.shields.io/pub/v/treemap.svg)](https://pub.dartlang.org/packages/treemap)
+[![pub package](https://img.shields.io/pub/v/treemap.svg)](https://pub.dartlang.org/packages/treemap) ![travis](https://api.travis-ci.com/lpongetti/treemap.svg?branch=master)
 
 A simple Dart implementation of treemap.
 
