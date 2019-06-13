@@ -33,7 +33,7 @@ class TreeMapBuilder extends StatelessWidget {
                   width: node.right - node.left,
                   height: node.bottom - node.top,
                   child: node.builder != null
-                      ? node.builder
+                      ? node.builder(context)
                       : Container(
                           decoration: BoxDecoration(
                             color: Colors.blue,
