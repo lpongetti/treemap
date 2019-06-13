@@ -8,6 +8,7 @@ class TreeMap {
   final TreeNode root;
   final Size size;
   final Tile tile;
+  final bool round;
 
   List<TreeNode> get leaves {
     return root.leaves;
@@ -17,11 +18,13 @@ class TreeMap {
     @required this.root,
     @required this.size,
     this.tile = const Squarify(),
+    this.round = false,
   })  : assert(root != null && root.children.length > 0),
         assert(size != null && size.width > 0 && size.height > 0) {
     root.right = size.width;
     root.bottom = size.height;
     root.eachBefore(_positionNode);
+    if (round) root.eachBefore(_roundNode);
   }
 
   _positionNode(TreeNode node) {
@@ -42,5 +45,12 @@ class TreeMap {
           node.right - node.padding.right,
           node.bottom - node.padding.bottom);
     }
+  }
+
+  _roundNode(TreeNode node) {
+    node.left = node.left.roundToDouble();
+    node.top = node.top.roundToDouble();
+    node.right = node.right.roundToDouble();
+    node.bottom = node.bottom.roundToDouble();
   }
 }

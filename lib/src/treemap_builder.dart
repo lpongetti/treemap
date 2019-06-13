@@ -7,10 +7,12 @@ import 'package:treemap/src/treenode.dart';
 class TreeMapBuilder extends StatelessWidget {
   final TreeNode root;
   final Tile tile;
+  final bool round;
 
   TreeMapBuilder({
     this.root,
     this.tile = const Squarify(),
+    this.round = false,
   });
 
   @override
