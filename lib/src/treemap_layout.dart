@@ -4,12 +4,12 @@ import 'package:treemap/src/tiles/tile.dart';
 import 'package:treemap/src/treemap.dart';
 import 'package:treemap/src/treenode.dart';
 
-class TreeMapBuilder extends StatelessWidget {
+class TreeMapLayout extends StatelessWidget {
   final TreeNode root;
   final Tile tile;
   final bool round;
 
-  TreeMapBuilder({
+  TreeMapLayout({
     this.root,
     this.tile = const Squarify(),
     this.round = false,

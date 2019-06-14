@@ -27,7 +27,7 @@ class MyHomePage extends StatelessWidget {
           color: Colors.red,
           width: 425,
           height: 425,
-          child: TreeMapBuilder(
+          child: TreeMapLayout(
             tile: Binary(),
             root: TreeNode.node(
                 // padding: EdgeInsets.symmetric(horizontal: 20),

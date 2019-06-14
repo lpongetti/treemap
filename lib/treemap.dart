@@ -2,7 +2,7 @@ library treemap;
 
 export 'src/treemap.dart';
 export 'src/treenode.dart';
-export 'src/treemap_builder.dart';
+export 'src/treemap_layout.dart';
 export 'src/tiles/binary.dart';
 export 'src/tiles/dice.dart';
 export 'src/tiles/slice.dart';
