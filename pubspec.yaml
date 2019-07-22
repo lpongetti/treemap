@@ -1,7 +1,7 @@
 name: treemap
 description:
   A simple Dart implementation of treemap.
-version: 0.1.1
+version: 0.2.0
 author: Lorenzo Pongetti <lorenzo.pongetti@gmail.com>
 
 homepage: https://github.com/lpongetti/treemap

@@ -1,5 +1,4 @@
 import 'package:treemap/src/tiles/tile.dart';
-import 'package:treemap/src/treemap.dart';
 import 'package:treemap/src/treenode.dart';
 
 class SliceDice extends Tile {
