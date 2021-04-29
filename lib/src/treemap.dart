@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:treemap/src/tiles/squarify.dart';
 import 'package:treemap/src/tiles/tile.dart';
@@ -15,12 +16,12 @@ class TreeMap {
   }
 
   TreeMap({
-    @required this.root,
-    @required this.size,
+    required this.root,
+    required this.size,
     this.tile = const Squarify(),
     this.round = false,
-  })  : assert(root != null && root.children.length > 0),
-        assert(size != null && size.width > 0 && size.height > 0) {
+  })  : assert(root.children!.length > 0),
+        assert(size.width > 0 && size.height > 0) {
     root.right = size.width;
     root.bottom = size.height;
     root.eachBefore(_positionNode);
@@ -32,18 +33,12 @@ class TreeMap {
     node.top += node.margin.top;
     node.right -= node.margin.right;
     node.bottom -= node.margin.bottom;
-    if (node.right < node.left)
-      node.left = node.right = (node.left + node.right) / 2;
-    if (node.bottom < node.top)
-      node.top = node.bottom = (node.top + node.bottom) / 2;
+    if (node.right < node.left) node.left = node.right = (node.left + node.right) / 2;
+    if (node.bottom < node.top) node.top = node.bottom = (node.top + node.bottom) / 2;
 
     if (node.children != null) {
-      tile.position(
-          node,
-          node.left + node.padding.left,
-          node.top + node.padding.top,
-          node.right - node.padding.right,
-          node.bottom - node.padding.bottom);
+      tile.position(node, node.left + node.padding!.left, node.top + node.padding!.top,
+          node.right - node.padding!.right, node.bottom - node.padding!.bottom);
     }
   }
 
