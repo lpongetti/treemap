@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:treemap/src/tiles/tile.dart';
 import 'package:treemap/src/treenode.dart';
 import 'package:treemap/src/treenode_base.dart';
@@ -17,12 +18,11 @@ class Squarify extends Tile {
   }
 
   @override
-  position(
-      TreeNode node, double left, double top, double right, double bottom) {
+  position(TreeNode node, double left, double top, double right, double bottom) {
     int i0 = 0, i1 = 0;
-    num sumValue, minValue, maxValue, childValue;
+    num? sumValue, minValue, maxValue, childValue;
     var value = node.value;
-    var nodes = node.children;
+    var nodes = node.children!;
 
     double newRatio, minRatio, alpha, beta;
 
@@ -42,9 +42,9 @@ class Squarify extends Tile {
 
       // Keep adding nodes while the aspect ratio maintains or improves.
       for (; i1 < nodes.length; ++i1) {
-        sumValue += childValue = nodes[i1].value;
-        if (childValue < minValue) minValue = childValue;
-        if (childValue > maxValue) maxValue = childValue;
+        sumValue = sumValue! + (childValue = nodes[i1].value);
+        if (childValue < minValue!) minValue = childValue;
+        if (childValue > maxValue!) maxValue = childValue;
         beta = sumValue * sumValue * alpha;
         newRatio = max(maxValue / beta, beta / minValue);
         if (newRatio > minRatio) {
@@ -57,13 +57,11 @@ class Squarify extends Tile {
       // Position and record the row orientation.
       var row = TreeNodeBase(children: nodes.sublist(i0, i1), value: sumValue);
       if (width < height)
-        dice(row, left, top, right,
-            value > 0 ? top += height * sumValue / value : bottom);
+        dice(row, left, top, right, value > 0 ? top += height * sumValue! / value : bottom);
       else
-        slice(row, left, top,
-            value > 0 ? left += width * sumValue / value : right, bottom);
+        slice(row, left, top, value > 0 ? left += width * sumValue! / value : right, bottom);
 
-      value -= sumValue;
+      value -= sumValue!;
       i0 = i1;
     }
   }

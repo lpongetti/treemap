@@ -10,7 +10,7 @@ class TreeMapLayout extends StatelessWidget {
   final bool round;
 
   TreeMapLayout({
-    this.root,
+    required this.root,
     this.tile = const Squarify(),
     this.round = false,
   });
@@ -35,7 +35,7 @@ class TreeMapLayout extends StatelessWidget {
                   width: node.right - node.left,
                   height: node.bottom - node.top,
                   child: node.builder != null
-                      ? node.builder(context)
+                      ? node.builder!(context)
                       : Container(
                           decoration: BoxDecoration(
                             color: Colors.blue,
