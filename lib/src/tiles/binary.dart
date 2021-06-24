@@ -9,13 +9,14 @@ class Binary extends Tile {
   position(
       TreeNode node, double left, double top, double right, double bottom) {
     _children = node.children;
-    _sums = List<num>(_children.length + 1);
-    var sum = 0;
-    _sums[0] = sum;
 
-    for (var i = 0; i < _children.length; ++i) {
-      _sums[i + 1] = sum += _children[i].value;
-    }
+    var sum = 0;
+    _sums = List<num>.generate(_children.length + 1, (index) {
+      if (index == 0) return 0;
+
+      sum += _children[index - 1].value;
+      return sum;
+    });
 
     partition(0, _children.length, node.value, left, top, right, bottom);
   }

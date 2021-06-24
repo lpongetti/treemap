@@ -55,7 +55,7 @@ class TreeNode implements TreeNodeBase {
   }
 
   List<TreeNode> get leaves {
-    var leafs = List<TreeNode>();
+    var leafs = <TreeNode>[];
     for (var child in children) {
       if (child.children == null) {
         leafs.add(child);

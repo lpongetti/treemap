@@ -45,7 +45,7 @@ class MyHomePage extends StatelessWidget {
                     margin: EdgeInsets.all(5),
                   ),
                   TreeNode.leaf(
-                    value: 3,
+                    value: 16,
                     margin: EdgeInsets.all(5),
                   ),
                   TreeNode.leaf(
