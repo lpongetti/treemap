@@ -23,15 +23,13 @@ void main() {
   });
 
   test('treenode root position with margin', () {
-    var treenode = new TreeNode.node(
-        margin: EdgeInsets.only(left: 30, top: 10, right: 40, bottom: 20),
+    var treenode = new TreeNode.node(margin: EdgeInsets.only(left: 30, top: 10, right: 40, bottom: 20), children: [
+      TreeNode.node(
         children: [
-          TreeNode.node(
-            children: [
-              TreeNode.leaf(value: 1),
-            ],
-          ),
-        ]);
+          TreeNode.leaf(value: 1),
+        ],
+      ),
+    ]);
     var treemap = TreeMap(root: treenode, size: Size(800, 800));
 
     expect(treemap.root.top, 10);
@@ -41,20 +39,18 @@ void main() {
   });
 
   test('treenode root position padding', () {
-    var treenode = new TreeNode.node(
-        padding: EdgeInsets.only(left: 30, top: 10, right: 40, bottom: 20),
+    var treenode = new TreeNode.node(padding: EdgeInsets.only(left: 30, top: 10, right: 40, bottom: 20), children: [
+      TreeNode.node(
         children: [
-          TreeNode.node(
-            children: [
-              TreeNode.leaf(value: 1),
-            ],
-          ),
-        ]);
+          TreeNode.leaf(value: 1),
+        ],
+      ),
+    ]);
     var treemap = TreeMap(root: treenode, size: Size(800, 800));
 
-    expect(treemap.root.children[0].top, 10);
-    expect(treemap.root.children[0].left, 30);
-    expect(treemap.root.children[0].bottom, 800 - 20);
-    expect(treemap.root.children[0].right, 800 - 40);
+    expect(treemap.root.children![0].top, 10);
+    expect(treemap.root.children![0].left, 30);
+    expect(treemap.root.children![0].bottom, 800 - 20);
+    expect(treemap.root.children![0].right, 800 - 40);
   });
 }
