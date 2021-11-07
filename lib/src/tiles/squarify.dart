@@ -18,7 +18,8 @@ class Squarify extends Tile {
   }
 
   @override
-  position(TreeNode node, double left, double top, double right, double bottom) {
+  position(
+      TreeNode node, double left, double top, double right, double bottom) {
     int i0 = 0, i1 = 0;
     num? sumValue, minValue, maxValue, childValue;
     var value = node.value;
@@ -57,9 +58,11 @@ class Squarify extends Tile {
       // Position and record the row orientation.
       var row = TreeNodeBase(children: nodes.sublist(i0, i1), value: sumValue);
       if (width < height)
-        dice(row, left, top, right, value > 0 ? top += height * sumValue! / value : bottom);
+        dice(row, left, top, right,
+            value > 0 ? top += height * sumValue! / value : bottom);
       else
-        slice(row, left, top, value > 0 ? left += width * sumValue! / value : right, bottom);
+        slice(row, left, top,
+            value > 0 ? left += width * sumValue! / value : right, bottom);
 
       value -= sumValue!;
       i0 = i1;

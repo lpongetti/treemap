@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:treemap/treemap.dart';
 
@@ -18,7 +20,43 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  List<TreeNode> childNode = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _addNewNode();
+  }
+
+  _addNewNode() {
+    setState(() {
+      final node = TreeNode.leaf(
+        value: max(1, Random().nextInt(10)),
+        margin: EdgeInsets.all(5),
+        options: TreeNodeOptions(
+          color: () {
+            Random random = Random();
+            return Colors.primaries[random.nextInt(Colors.primaries.length)];
+          }(),
+        ),
+      );
+      node.options?.onTap = () {
+        setState(() {
+          childNode.remove(node);
+        });
+      };
+      childNode.add(node);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,37 +66,20 @@ class MyHomePage extends StatelessWidget {
           width: 425,
           height: 425,
           child: TreeMapLayout(
+            duration: Duration(milliseconds: 500),
             tile: Binary(),
             root: TreeNode.node(
-                // padding: EdgeInsets.symmetric(horizontal: 20),
-                children: [
-                  TreeNode.leaf(
-                    value: 16,
-                    margin: EdgeInsets.all(5),
-                  ),
-                  TreeNode.leaf(
-                    value: 57,
-                    margin: EdgeInsets.all(5),
-                  ),
-                  TreeNode.leaf(
-                    value: 97,
-                    margin: EdgeInsets.all(5),
-                  ),
-                  TreeNode.leaf(
-                    value: 16,
-                    margin: EdgeInsets.all(5),
-                  ),
-                  TreeNode.leaf(
-                    value: 43,
-                    margin: EdgeInsets.all(5),
-                  ),
-                  TreeNode.leaf(
-                    value: 54,
-                    margin: EdgeInsets.all(5),
-                  ),
-                ]),
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              children: childNode,
+            ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Text("+"),
+        onPressed: () {
+          _addNewNode();
+        },
       ),
     );
   }

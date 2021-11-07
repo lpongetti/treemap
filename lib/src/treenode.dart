@@ -3,6 +3,7 @@ import 'package:treemap/src/treenode_base.dart';
 
 class TreeNode implements TreeNodeBase {
   List<TreeNode>? _children;
+  TreeNodeOptions? options;
   EdgeInsets _margin;
   EdgeInsets? _padding;
   num _value = 0;
@@ -39,6 +40,7 @@ class TreeNode implements TreeNodeBase {
     required num value,
     WidgetBuilder? builder,
     EdgeInsets margin = const EdgeInsets.all(0),
+    this.options,
   })  : _value = value,
         _builder = builder,
         _margin = margin;
@@ -78,4 +80,18 @@ class TreeNode implements TreeNodeBase {
       }
     }
   }
+}
+
+class TreeNodeOptions {
+  final Color? color;
+  final BoxBorder? border;
+  final Widget? child;
+  GestureTapCallback? onTap;
+
+  TreeNodeOptions({
+    this.color,
+    this.border,
+    this.child,
+    this.onTap,
+  });
 }

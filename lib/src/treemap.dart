@@ -33,12 +33,18 @@ class TreeMap {
     node.top += node.margin.top;
     node.right -= node.margin.right;
     node.bottom -= node.margin.bottom;
-    if (node.right < node.left) node.left = node.right = (node.left + node.right) / 2;
-    if (node.bottom < node.top) node.top = node.bottom = (node.top + node.bottom) / 2;
+    if (node.right < node.left)
+      node.left = node.right = (node.left + node.right) / 2;
+    if (node.bottom < node.top)
+      node.top = node.bottom = (node.top + node.bottom) / 2;
 
     if (node.children != null) {
-      tile.position(node, node.left + node.padding!.left, node.top + node.padding!.top,
-          node.right - node.padding!.right, node.bottom - node.padding!.bottom);
+      tile.position(
+          node,
+          node.left + node.padding!.left,
+          node.top + node.padding!.top,
+          node.right - node.padding!.right,
+          node.bottom - node.padding!.bottom);
     }
   }
 
