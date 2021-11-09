@@ -2,18 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:treemap/src/treenode_base.dart';
 
 class TreeNode implements TreeNodeBase {
+  num _value = 0;
   List<TreeNode>? children;
   TreeNodeOptions? options;
   EdgeInsets margin;
   EdgeInsets padding;
-  num value = 0;
   WidgetBuilder? builder;
-
   TreeNode? parent;
   double top = 0;
   double left = 0;
   double right = 0;
   double bottom = 0;
+
+  num get value {
+    if (children == null) {
+      return _value;
+    }
+    return children!.fold(0, (a, b) => a + b.value);
+  }
+
+  set value(num newValue) {
+    if (children == null) {
+      _value = newValue;
+    }
+  }
 
   TreeNode.node({
     required this.children,
@@ -22,19 +34,20 @@ class TreeNode implements TreeNodeBase {
     this.padding = const EdgeInsets.all(0),
     this.options,
   }) : assert(children != null && children.length > 0) {
-    for (var child in children ?? []) {
-      this.value += child.value;
+    for (var child in children!) {
+      this._value += child.value;
       child.parent = this;
     }
   }
 
   TreeNode.leaf({
-    required this.value,
+    required num value,
     WidgetBuilder? builder,
     this.margin = const EdgeInsets.all(0),
     this.padding = const EdgeInsets.all(0),
     this.options,
-  }) : assert(value > 0);
+  })  : assert(value > 0),
+        _value = value;
 
   int get depth {
     int depth = 0;

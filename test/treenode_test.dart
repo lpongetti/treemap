@@ -8,7 +8,12 @@ void main() {
     treenode = new TreeNode.node(children: [
       TreeNode.node(
         children: [
-          TreeNode.leaf(value: 1),
+          TreeNode.leaf(
+            value: 25,
+          ),
+          TreeNode.leaf(
+            value: 50,
+          )
         ],
       ),
     ]);
@@ -27,23 +32,31 @@ void main() {
   });
 
   test('treenode leaves lenght', () {
-    expect(treenode!.leaves.length, 1);
+    expect(treenode!.leaves.length, 3);
   });
 
   test('treenode leaves depth', () {
-    expect(treenode!.leaves[0].depth, 2);
+    expect(treenode!.leaves[1].depth, 2);
   });
 
   test('treenode eachBefore', () {
     int i = 0;
     treenode!.eachBefore((node) {
       expect(node.depth, i);
-      i++;
+      if (i < 2) {
+        i++;
+      }
     });
   });
 
   test('treenode parent', () {
     expect(treenode!.parent, null);
     expect(treenode!.children![0].parent, treenode);
+  });
+
+  test('treenode value', () {
+    expect(treenode!.value, 75);
+    treenode!.children![0].children![0].value += 1;
+    expect(treenode!.value, 76);
   });
 }

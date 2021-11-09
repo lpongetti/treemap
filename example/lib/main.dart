@@ -50,7 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
       );
       node.options?.onTap = () {
         setState(() {
-          childNode.remove(node);
+          node.value += 1;
+          // childNode.remove(node);
         });
       };
       childNode.add(node);
