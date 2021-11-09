@@ -41,10 +41,10 @@ class TreeMap {
     if (node.children != null) {
       tile.position(
           node,
-          node.left + node.padding!.left,
-          node.top + node.padding!.top,
-          node.right - node.padding!.right,
-          node.bottom - node.padding!.bottom);
+          node.left + node.padding.left,
+          node.top + node.padding.top,
+          node.right - node.padding.right,
+          node.bottom - node.padding.bottom);
     }
   }
 

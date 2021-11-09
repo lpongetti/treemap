@@ -2,54 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:treemap/src/treenode_base.dart';
 
 class TreeNode implements TreeNodeBase {
-  List<TreeNode>? _children;
+  List<TreeNode>? children;
   TreeNodeOptions? options;
-  EdgeInsets _margin;
-  EdgeInsets? _padding;
-  num _value = 0;
-  WidgetBuilder? _builder;
-  TreeNode? _parent;
+  EdgeInsets margin;
+  EdgeInsets padding;
+  num value = 0;
+  WidgetBuilder? builder;
+
+  TreeNode? parent;
   double top = 0;
   double left = 0;
   double right = 0;
   double bottom = 0;
 
-  List<TreeNode>? get children => _children;
-  num get value => _value;
-  EdgeInsets get margin => _margin;
-  EdgeInsets? get padding => _padding;
-  WidgetBuilder? get builder => _builder;
-  TreeNode? get parent => _parent;
-
   TreeNode.node({
-    required List<TreeNode> children,
-    EdgeInsets margin = const EdgeInsets.all(0),
-    EdgeInsets padding = const EdgeInsets.all(0),
-  })  : _children = children,
-        _margin = margin,
-        _padding = padding,
-        assert(children.length > 0) {
-    _value = 0;
-    for (var child in children) {
-      _value += child.value;
-      child._parent = this;
+    required this.children,
+    WidgetBuilder? builder,
+    this.margin = const EdgeInsets.all(0),
+    this.padding = const EdgeInsets.all(0),
+    this.options,
+  }) : assert(children != null && children.length > 0) {
+    for (var child in children ?? []) {
+      this.value += child.value;
+      child.parent = this;
     }
   }
 
   TreeNode.leaf({
-    required num value,
+    required this.value,
     WidgetBuilder? builder,
-    EdgeInsets margin = const EdgeInsets.all(0),
+    this.margin = const EdgeInsets.all(0),
+    this.padding = const EdgeInsets.all(0),
     this.options,
-  })  : _value = value,
-        _builder = builder,
-        _margin = margin;
+  }) : assert(value > 0);
 
   int get depth {
     int depth = 0;
-    TreeNode? parent = _parent;
-    while (parent != null) {
-      parent = parent._parent;
+    TreeNode? dparent = parent;
+    while (dparent != null) {
+      dparent = dparent.parent;
       depth++;
     }
     return depth;
@@ -61,7 +52,7 @@ class TreeNode implements TreeNodeBase {
       if (child.children == null) {
         leafs.add(child);
       } else {
-        leafs.addAll(child.leaves);
+        leafs.addAll([child, ...child.leaves]);
       }
     }
     return leafs;

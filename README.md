@@ -26,34 +26,37 @@ Add in you project.
   Widget build(BuildContext context) {
     return child: TreeMapLayout(
       tile: Binary(),
-      root: TreeNode.node(
-        // padding: EdgeInsets.symmetric(horizontal: 20),
-        children: [
-          TreeNode.leaf(
-            value: 16,
-            margin: EdgeInsets.all(5),
-          ),
-          TreeNode.leaf(
-            value: 57,
-            margin: EdgeInsets.all(5),
-          ),
-          TreeNode.leaf(
-            value: 97,
-            margin: EdgeInsets.all(5),
-          ),
-          TreeNode.leaf(
-            value: 3,
-            margin: EdgeInsets.all(5),
-          ),
-          TreeNode.leaf(
-            value: 43,
-            margin: EdgeInsets.all(5),
-          ),
-          TreeNode.leaf(
-            value: 54,
-            margin: EdgeInsets.all(5),
-          ),
-        ]),
+      children: [
+        TreeNode.node(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          children: [
+            TreeNode.leaf(
+              value: 16,
+              margin: EdgeInsets.all(5),
+            ),
+            TreeNode.leaf(
+              value: 57,
+              margin: EdgeInsets.all(5),
+            ),
+            TreeNode.leaf(
+              value: 97,
+              margin: EdgeInsets.all(5),
+            ),
+            TreeNode.leaf(
+              value: 3,
+              margin: EdgeInsets.all(5),
+            ),
+            TreeNode.leaf(
+              value: 43,
+              margin: EdgeInsets.all(5),
+            ),
+            TreeNode.leaf(
+              value: 54,
+              margin: EdgeInsets.all(5),
+            ),
+          ],
+        ),
+      ],
     );
   }
 ```

@@ -68,10 +68,24 @@ class _MyHomePageState extends State<MyHomePage> {
           child: TreeMapLayout(
             duration: Duration(milliseconds: 500),
             tile: Binary(),
-            root: TreeNode.node(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              children: childNode,
-            ),
+            children: [
+              TreeNode.node(
+                padding: EdgeInsets.all(20),
+                margin: EdgeInsets.all(5),
+                children: childNode,
+                options: TreeNodeOptions(
+                  color: Colors.amber,
+                ),
+              ),
+              TreeNode.node(
+                padding: EdgeInsets.all(20),
+                margin: EdgeInsets.all(5),
+                children: [TreeNode.leaf(value: 15)],
+                options: TreeNodeOptions(
+                  color: Colors.blue,
+                ),
+              ),
+            ],
           ),
         ),
       ),
